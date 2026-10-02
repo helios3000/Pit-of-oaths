@@ -1,0 +1,16 @@
+{
+  "name": "Pit of Oaths",
+  "short_name": "Pit of Oaths",
+  "description": "Solo hero arena: hunt the jungle, forge gear, reach the kill goal.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "fullscreen",
+  "orientation": "landscape",
+  "background_color": "#0c0e10",
+  "theme_color": "#0c0e10",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
