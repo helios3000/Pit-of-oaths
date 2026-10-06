@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <title>Astral Oath</title>
+  <meta name="theme-color" content="#0c0e10">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Astral Oath">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="apple-touch-icon" href="./icons/icon-180.png">
+  <script type="module" crossorigin src="./assets/index-zAADUrX6.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-BbcHrH7m.css">
+</head>
+<body>
+  <!-- everything renders inside a fixed 1280x720 stage that is letterboxed to the window -->
+  <!-- reads the device safe-area insets (notch, Dynamic Island, rounded corners, home bar) -->
+  <div id="safeProbe" style="position:fixed;inset:0;visibility:hidden;pointer-events:none;padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px)"></div>
+  <div id="stage">
+    <div id="game"></div>
+    <div id="vignette"></div>
+
+    <main id="menu">
+      <header class="mtop">
+        <div class="brand"><h1>Astral Oath</h1><span class="sub" data-en="Knights of the Astral Order">성간 기사단</span></div>
+        <p class="tagline" data-en="Knights of the Astral Order: hunt the voidborn, forge fusion weapons, and reach the kill goal first.">성간 기사단의 결투. 공허체를 사냥하고 융합 무기를 단조해 먼저 목표 킬을 채우세요.</p>
+        <div class="mtools"><div class="chips modesw" data-opt="mode"></div><button class="ghost touch-only" id="scaleBtn"></button><div class="chips" data-opt="lang"></div><button class="ghost" id="helpBtn" data-en="How to play">게임 방법</button></div>
+      </header>
+      <div class="mbody">
+        <section class="mleft">
+          <h2 data-en="Choose a Hero">영웅 선택</h2>
+          <div class="heroes" id="heroGrid"></div>
+          <div class="opts">
+            <div class="opt"><span data-en="Team size">팀 인원</span><div class="chips" data-opt="size"></div></div>
+            <div class="opt"><span data-en="Kill goal">목표 킬</span><div class="chips" data-opt="goal"></div></div>
+            <div class="opt"><span data-en="AI difficulty">AI 난이도</span><div class="chips" data-opt="diff"></div></div>
+            <div class="opt"><span data-en="Skill learning">스킬 습득</span><div class="chips" data-opt="auto"></div></div>
+          </div>
+        </section>
+        <section class="mright" id="heroDetail"></section>
+      </div>
+      <footer class="mfoot"><span class="credit" data-en="Knights &amp; bosses: chierit (CC-BY 4.0) · Creatures: LuizMelo (CC0), CreativeKind">기사·보스: chierit (CC-BY 4.0) · 몬스터: LuizMelo (CC0), CreativeKind</span><span class="hint" data-en="&lt;kbd&gt;Enter&lt;/kbd&gt; to start"><kbd>Enter</kbd>로 시작</span><span class="ver" id="verTag"></span><button class="start" id="startBtn" disabled>Loading…</button></footer>
+      <div class="panel" id="help" hidden>
+        <div class="ph"><h3 data-en="How to play">게임 방법</h3><button class="x" id="helpX" data-en="Close">닫기</button></div>
+        <div class="help">
+          <div><h3 data-en="Controls">조작</h3><ul data-en="&lt;li&gt;Left/right click: move · arrow keys move&lt;/li&gt;&lt;li&gt;&lt;kbd&gt;A&lt;/kbd&gt;: basic attack on the nearest enemy (hold to keep attacking) — heroes never attack on their own&lt;/li&gt;&lt;li&gt;&lt;kbd&gt;Q&lt;/kbd&gt;&lt;kbd&gt;W&lt;/kbd&gt;&lt;kbd&gt;E&lt;/kbd&gt;&lt;kbd&gt;R&lt;/kbd&gt;: cast toward cursor · &lt;kbd&gt;Shift&lt;/kbd&gt;+key: level up · &lt;kbd&gt;T&lt;/kbd&gt;: special skill from a hidden item&lt;/li&gt;&lt;li&gt;&lt;kbd&gt;1&lt;/kbd&gt;–&lt;kbd&gt;6&lt;/kbd&gt;: use item · &lt;kbd&gt;S&lt;/kbd&gt;: stop&lt;/li&gt;&lt;li&gt;&lt;kbd&gt;B&lt;/kbd&gt;: shop · &lt;kbd&gt;F&lt;/kbd&gt;: forge · &lt;kbd&gt;Tab&lt;/kbd&gt;: scoreboard · &lt;kbd&gt;M&lt;/kbd&gt;: sound · &lt;kbd&gt;Esc&lt;/kbd&gt;: pause · F11: fullscreen&lt;/li&gt;">
+            <li>마우스 클릭(좌/우): 이동 · 방향키 이동</li>
+            <li><kbd>A</kbd>: 가까운 적 기본 공격(누르고 있으면 계속 공격) · 자동 공격은 하지 않음</li>
+            <li><kbd>Q</kbd><kbd>W</kbd><kbd>E</kbd><kbd>R</kbd>: 커서 방향으로 스킬 · <kbd>Shift</kbd>+키: 스킬 레벨업 · <kbd>T</kbd>: 히든 아이템 특수 스킬</li>
+            <li><kbd>1</kbd>~<kbd>6</kbd>: 아이템 사용 · <kbd>S</kbd>: 정지</li>
+            <li><kbd>B</kbd>: 상점 · <kbd>F</kbd>: 대장간 · <kbd>Tab</kbd>: 점수판 · <kbd>M</kbd>: 소리 · <kbd>Esc</kbd>: 일시정지 · F11: 전체 화면</li>
+          </ul></div>
+          <div><h3 data-en="Gear &amp; forging">장비와 조합</h3><ul data-en="&lt;li&gt;16 gear lines × 6 rarities: Common → Rare → Epic → Legendary → Relic → Ancient&lt;/li&gt;&lt;li&gt;Bag (6) gives stats; the stash (12) stores materials for forging&lt;/li&gt;&lt;li&gt;Forge two items of the same rarity; Great Success can skip a tier&lt;/li&gt;&lt;li&gt;12 hidden weapons from specific line pairs at Epic or higher&lt;/li&gt;">
+            <li>장비 16계열 × 6등급: 일반 → 희귀 → 영웅 → 전설 → 유물 → 고대</li>
+            <li>가방(6칸)만 능력치 적용, 보관함(12칸)은 조합 재료 보관용</li>
+            <li>같은 등급 2개 조합, 낮은 확률로 대성공(한 단계 더)</li>
+            <li>특정 두 계열을 영웅 등급 이상에서 조합하면 히든 무기 12종</li>
+          </ul></div>
+          <div><h3 data-en="Map">맵</h3><ul data-en="&lt;li&gt;18 voidborn nests with Crimson/Azure Core wardens&lt;/li&gt;&lt;li&gt;Golden Watcher and Plague Mother on the rift, the Abyss Seer in the center&lt;/li&gt;&lt;li&gt;Supply modules drop every 60s on the rift&lt;/li&gt;&lt;li&gt;Hero kills pay far more than monsters; the trailing team earns +30%&lt;/li&gt;">
+            <li>공허체 둥지 18곳, 적색·청색 코어 수호체</li>
+            <li>균열 지대에 황금 감시체·역병 포자모체, 중앙에 심연의 관측자</li>
+            <li>60초마다 균열 지대에 보급 모듈 투하</li>
+            <li>영웅 처치 보상이 몬스터보다 큼, 뒤진 팀은 +30%</li>
+          </ul></div>
+          <div><h3 data-en="Credits">크레딧</h3><ul data-en="&lt;li&gt;Knights, bosses: chierit — itch.io/chierit (CC-BY 4.0)&lt;/li&gt;&lt;li&gt;Monsters: LuizMelo (CC0), CreativeKind&lt;/li&gt;&lt;li&gt;Everything else generated in code&lt;/li&gt;">
+            <li>기사·보스: chierit — chierit.itch.io (CC-BY 4.0)</li>
+            <li>몬스터: LuizMelo (CC0), CreativeKind</li>
+            <li>나머지는 코드로 생성</li>
+          </ul></div>
+        </div>
+      </div>
+    </main>
+
+    <div id="hud" hidden>
+      <div id="top"><span class="lab ally" data-en="US">우리</span><span class="n ally" id="sB">0</span><div class="mid"><b id="goalT"></b><span id="clock">0:00</span></div><span class="n enemy" id="sR">0</span><span class="lab enemy" data-en="THEM">상대</span></div>
+      <div id="announce"></div>
+      <div id="bossBar" hidden><b id="bossName"></b><div class="bb"><i id="bossFill"></i></div></div>
+      <div id="cutin"><canvas width="360" height="240"></canvas><div class="ct"><span></span><b></b></div></div>
+      <div id="allies"></div>
+      <div id="feed"></div>
+      <div id="miniWrap"><canvas id="mini" width="440" height="220"></canvas>
+        <div class="mbtns"><button id="bBoard" data-en="Score &lt;kbd&gt;Tab&lt;/kbd&gt;">점수판 <kbd>Tab</kbd></button><button id="bMute"></button><button id="bPause" data-en="Menu &lt;kbd&gt;Esc&lt;/kbd&gt;">메뉴 <kbd>Esc</kbd></button></div>
+      </div>
+      <div id="buffs"></div>
+      <!-- touch controls (shown only on touch devices) -->
+      <div id="joy"><div class="jbase"><div class="jknob"></div></div></div>
+      <button id="atkBtn" aria-label="Attack">A</button>
+      <div id="console">
+        <div class="c-por"><canvas id="por" width="180" height="180"></canvas><span id="pLv"></span></div>
+        <div class="c-info">
+          <div class="c-name"><b id="pName"></b><span id="pCls"></span><span id="spT"></span></div>
+          <div class="bar hp"><i id="hpF"></i><span id="hpT"></span></div>
+          <div class="bar mp"><i id="mpF"></i><span id="mpT"></span></div>
+          <div class="bar xp"><i id="xpF"></i></div>
+          <div id="stats"></div>
+        </div>
+        <div class="c-skills" id="skrow"></div>
+        <div class="c-inv"><div id="inv"></div></div>
+        <div class="c-gold"><span class="gold"><i></i><b id="gold">0</b></span><button id="shopBtn" data-en="Shop &lt;kbd&gt;B&lt;/kbd&gt;">상점 <kbd>B</kbd></button></div>
+      </div>
+      <div id="deadMsg" hidden><span data-en="Respawn in">부활까지</span><b id="deadT">0</b><span data-en="You can use the shop while dead">사망 중에도 상점을 이용할 수 있습니다</span></div>
+      <div id="toast"></div>
+      <div id="tip" hidden></div>
+
+      <div class="panel" id="shop" hidden>
+        <div class="ph"><h3 data-en="Shop">상점</h3><div class="tabs"><button class="tab" data-tab="buy" data-en="Buy &lt;kbd&gt;B&lt;/kbd&gt;">구매 <kbd>B</kbd></button><button class="tab" data-tab="forge" data-en="Forge &lt;kbd&gt;F&lt;/kbd&gt;">대장간 <kbd>F</kbd></button></div><span class="gold"><i></i><b id="shopGold"></b></span><button class="x" id="shopX" data-en="Close">닫기</button></div>
+        <div class="shopnote" id="shopNote"></div>
+        <div class="shopinv" id="shopInv"></div>
+        <div id="shopGrid"></div>
+        <div id="forgeView" hidden></div>
+      </div>
+      <div class="panel" id="board" hidden>
+        <div class="ph"><h3 data-en="Scoreboard">점수판</h3><button class="x" id="boardX" data-en="Close">닫기</button></div>
+        <div id="boardBody"></div>
+      </div>
+      <div class="panel small" id="pause" hidden>
+        <div class="ph"><h3 data-en="Paused">일시정지</h3></div>
+        <div class="btns"><button class="bigbtn pri" id="resumeBtn" data-en="Resume">계속하기</button><button class="bigbtn" id="autoBtn"></button><button class="bigbtn" id="langBtn"></button><button class="bigbtn touch-only" id="scaleBtn2"></button><button class="bigbtn" id="townBtn" hidden data-en="Return to flagship">모함으로 귀환</button><button class="bigbtn" id="quitBtn" data-en="Quit to menu">메뉴로 나가기</button></div>
+      </div>
+      <div class="panel" id="town" hidden></div>
+      <div class="panel small" id="advEnd" hidden></div>
+      <div class="panel" id="end" hidden>
+        <div class="ph"><h3 id="endTitle"></h3><span id="endScore"></span></div>
+        <div id="endMvp"></div>
+        <div id="endBody"></div>
+        <div class="btns"><button class="bigbtn pri" id="againBtn" data-en="Play again">같은 설정으로 다시</button><button class="bigbtn" id="menuBtn" data-en="Choose another hero">영웅 다시 고르기</button></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
